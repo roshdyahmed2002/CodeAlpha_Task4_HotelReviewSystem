@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Hotels</title>
+</head>
+<body>
+
+<h2>Hotels</h2>
+
+<form th:action="@{/searchHotels}" method="get">
+  <label for="search">Search:</label>
+  <input type="text" id="search" name="search" th:value="${searchTerm}" >
+  <button type="submit">Search</button>
+</form>
+<br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Rating</th>
+    <th>Details</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="hotel : ${hotels}">
+    <td th:text="${hotel.hotel_id}"></td>
+    <td th:text="${hotel.name}"></td>
+    <td th:text="${hotel.price}"></td>
+    <td th:text="${hotel.rating}"></td>
+    <td>
+      <a th:href="@{'/hotelDetails/' + ${hotel.hotel_id}}">Details</a>
+    </td>
+    <td>
+      <a th:href="@{'/deleteHotel/' + ${hotel.hotel_id}}">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+<a th:href="@{/hotelForm}">
+  <button type="button">Add New Hotel</button>
+</a>
+
+</body>
+</html>
